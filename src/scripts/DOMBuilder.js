@@ -1,4 +1,5 @@
 import api from "./api.js";
+import HTMLBuilder from "./employeeHTMLCardBuilder"
 
 export default {
 
@@ -8,25 +9,13 @@ export default {
 
         let employeeCardsHTML = ""
 
-        api.getEmployees()
-
+        api.getEmployeesInfo()
             .then(response => {
+                for (let employeeObject of response) {
 
-                for (let singleEmployee of response) {
-
-                    let newEmployeeObject = {
-                        "name": "",
-                        "department": "",
-                        "computer": ""
-                    }
-
-                    newEmployeeObject["name"] = singleEmployee.empName
-                    console.log(newEmployeeObject)
-
-
-
+                    employeeCardsHTML += HTMLBuilder.buildHTML(employeeObject)
                 }
-            }).then(api.getDepartment(singleEmployee.id))
-            .then(response => console.log(response))
+                employeeCardsContainer.innerHTML = employeeCardsHTML
+            })
     }
 }
