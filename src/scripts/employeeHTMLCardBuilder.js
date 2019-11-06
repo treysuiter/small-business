@@ -1,4 +1,7 @@
 export default {
+
+    //Build HTML for each employee card
+
     buildHTML: (employee) => {
         console.log("html builder object", employee)
         return `
